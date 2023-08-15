@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="volunteerform.html">
+  <link rel="stylesheet" type="text/css" href="loginstyles.css">
+  <link rel="stylesheet" type="text/css" href="displayVdata.html">
+</head>
+<body>
+ <h1> Sign In as Volunteer</h1>
+
+
+  <form>
+    <form method="get" action="http://127.0.0.1:8461/openapi.json">
+    <label for="Username">Name:</label>
+    <input type="text" id="name" name="name" pattern="[a-zA-Z\s]+" title="Only alphabets are allowed"><br><br>
+  
+    <label for="Location">Address:</label>
+    <input type="text" id="address" name="address"><br><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="number" id="phoneNumber" name="phoneNumber"><br><br>
+>
+
+    <input type="submit" value="Submit" onclick="displayFormData(); return false;">
+    <div id ="response"> </div>
+    <input type="button" value="Display all Data" onclick="displayData();">
+  </form>
+  
+  <script>
+   let formDataArray = [];
+
+function displayFormData() {
+  var name = document.getElementById("name").value;
+  var address = document.getElementById("address").value;
+  var phoneNumber = document.getElementById("phoneNumber").value;
+  
+
+  
+
+  formDataArray.push({name, address, phoneNumber});
+
+  localStorage.setItem("formDataArray", JSON.stringify(formDataArray));
+  
+  console.log(localStorage.getItem("formDataArray"));
+
+
+  /*(var params = new URLSearchParams();
+  formDataArray.forEach(function(data) {
+    params.append("name", data.name);
+    params.append("address", data.address);
+    params.append("phoneNumber", data.phoneNumber);
+  });*/
+  
+      window.location.href = "volunteerform.html?name=" + name + "&address=" + address + "&phoneNumber=" + phoneNumber ;
+    }
+
+    function displayData() {
+      window.open("displayVdata.html", "____blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+    }
+   
+  </script>
+
+  <script  src="XMLHTTPREQ.js"> </script>
+ 
+    
+</body>
+</html>
